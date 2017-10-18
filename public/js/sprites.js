@@ -20,3 +20,4 @@ export function loadBackgroundSprites() {
         return sprites
     })
 }
+
