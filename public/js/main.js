@@ -1,5 +1,7 @@
 import Compositor from './Compositor.js'
 import Entity from './Entity.js'
+import Timer from './Timer.js'
+
 import { loadLevel } from './loaders.js'
 import { createBackgroundLayer, createSpriteLayer } from './layers.js'
 import { loadBackgroundSprites } from './sprites.js'
@@ -24,27 +26,27 @@ Promise.all([
     const backgroundLayer = createBackgroundLayer(level.backgrounds, sprites)
     comp.layers.push(backgroundLayer)
     
-    const gravity = 0.5
+    const gravity = 30
+    mario.pos.set(64, 180)
+    mario.vel.set(200, -600)
     
     const spriteLayer = createSpriteLayer(mario)
     comp.layers.push(spriteLayer)
-    
-    let deltaTime   = 0
-    let lastTime    = 0
 
-    function update(time) {
-        deltaTime = (time - lastTime) / 1000
-        console.log(time)
-        comp.draw(context)
-        mario.update(deltaTime)
-        
-        mario.vel.y += gravity
-        
-        requestAnimationFrame(update)
-        
-        lastTime = time
+
+
+    const timer = new Timer(1/60)
+
+
+
+    timer.update = function update(deltaTime) {
+       
+            comp.draw(context)
+            mario.update(deltaTime)
+            mario.vel.y += gravity
+
     }
 
-    update(0)
+    timer.start()
 
 })
