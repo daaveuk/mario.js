@@ -12,7 +12,7 @@ export default class Timer {
             }
 
             lastTime = time;
-
+            console.log('Ding')
             this.enqueue();
         }
     }
