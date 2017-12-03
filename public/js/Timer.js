@@ -12,7 +12,7 @@ export default class Timer {
             }
 
             lastTime = time;
-
+       
             this.enqueue();
         }
     }
